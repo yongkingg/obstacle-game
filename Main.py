@@ -18,18 +18,19 @@
 #     listener.join()
 
 
-import PyQt5
-from PyQt5 import QtWidgets, QtCore, Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow
-import sys
-import DetectKey
 import Ui
+from PyQt5 import QtWidgets, QtCore, Qt
+import keyboard
+import sys
 
 class Main  :
     def __init__(self):
         self.ui = Ui.Ui()
-        self.detectKey = DetectKey.DetectKeyThread()
-        self.detectKey.run()
+        self.ui.mainWindow.keyPressEvent = lambda event : self.keyEvent(event)
+
+    def keyEvent(self,e):
+        if e.key() == QtCore.Qt.Key_F:
+            print("F눌림")
 
 
     
