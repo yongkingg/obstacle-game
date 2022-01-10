@@ -13,9 +13,13 @@ class StartPage:
     def startGame(self):
         self.ui.stackedWidget.setCurrentIndex(1)  
         self.gamePage = GamePage.GamePage(self.ui)
+        self.countDown()
+
+    def countDown(self):
         self.countDown = CountDown.CountDown(self.ui)
         self.countDown.daemon = True
         self.countDown.start()
+
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)

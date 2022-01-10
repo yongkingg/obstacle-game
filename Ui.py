@@ -59,9 +59,9 @@ class Ui:
         self.timeArea.setFont(font)
         self.timeArea.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.obstacleArea = QtWidgets.QLabel(self.gamePage)
-        self.obstacleArea.setGeometry(375,375,50,50)
-        self.obstacleArea.setStyleSheet("background-color : black;")
+        # self.obstacleArea = QtWidgets.QLabel(self.gamePage)
+        # self.obstacleArea.setGeometry(375,375,50,50)
+        # self.obstacleArea.setStyleSheet("background-color : black;")
 
 
 
