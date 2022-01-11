@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets, QtCore, Qt
-import Pattern
 import threading
 import random
 import time
@@ -36,17 +35,17 @@ class ObstacleThread(QtCore.QThread):
     def run(self):
         for index in range(0,10):
             if self.sign == "+-":
-                self.obstacle_xpos += random.randint(5,10)
-                self.obstacle_ypos -= random.randint(5,10)
+                self.obstacle_xpos += random.randint(30,40)
+                self.obstacle_ypos -= random.randint(30,40)
             elif self.sign == "-+":
-                self.obstacle_xpos -= random.randint(5,10)
-                self.obstacle_ypos += random.randint(5,10)
+                self.obstacle_xpos -= random.randint(30,40)
+                self.obstacle_ypos += random.randint(30,40)
             elif self.sign == "++":
-                self.obstacle_xpos += random.randint(5,10)
-                self.obstacle_ypos += random.randint(5,10)
+                self.obstacle_xpos += random.randint(30,40)
+                self.obstacle_ypos += random.randint(30,40)
             elif self.sign == "--":
-                self.obstacle_xpos -= random.randint(5,10)
-                self.obstacle_ypos -= random.randint(5,10)
+                self.obstacle_xpos -= random.randint(30,40)
+                self.obstacle_ypos -= random.randint(30,40)
             self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos)
             time.sleep(1)
 
@@ -54,21 +53,25 @@ class Obstacle:
     def __init__(self,ui):
         self.ui = ui
         self.threadList = []
-        self.start = time.time()
-        for index in range(0,3):
+        self.obstacle = None
+        self.playCount = 0
+        for index in range(0,4):
             makeObstacle = ObstacleThread(self.ui)
             makeObstacle.resultSignal.connect(self.showObstacle)
             makeObstacle.start()
             self.threadList.append(makeObstacle)    
             
-            self.obstacle = QtWidgets.QLabel(self.ui.gamePage)
-            self.obstacle.setGeometry(375,375,50,50)
-            self.obstacle.setStyleSheet("background-color : black;")
-            self.obstacle.show()
+            
+
     # @QtCore.pyqtSlot(int,int)
     def showObstacle(self,x_value,y_value):
+        self.obstacle = QtWidgets.QLabel(self.ui.gamePage)
+        self.obstacle.setGeometry(375,375,50,50)
+        self.obstacle.setStyleSheet("background-color : black;")
+        self.obstacle.show()
         self.obstacle.move(x_value,y_value)
-        # self.ui.testObject.move(x_value,y_value)
+# 왜 move인데 움직이지 않고 새로 생성되는가 ? 
+# 왜 시작점이 똑같지 않은가 ? 
 
 
 # 클래스 하나 만들어놓고, 그걸 객체로 받음. 그 객체를 반복문으로 리스트에 담아놓음 

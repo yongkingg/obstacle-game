@@ -9,7 +9,7 @@ class CountDown(threading.Thread):
         self.sec = 60
 
     def run(self):
-        while self.sec > 0:
+        while self.sec >= 0:
             self.ui.timeArea.setText(str(self.sec))
             self.sec -= 1
             time.sleep(1)

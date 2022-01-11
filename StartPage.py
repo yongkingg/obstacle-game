@@ -15,8 +15,6 @@ class StartPage:
         self.ui.stackedWidget.setCurrentIndex(1)  
         self.gamePage = GamePage.GamePage(self.ui)
 
-        
-
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)
