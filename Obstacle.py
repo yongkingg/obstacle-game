@@ -6,11 +6,11 @@ import time
 # 가독성을 위해 QThread나 Thread 둘 중 하나만 사용할 것.
 
 class ObstacleThread(QtCore.QThread):
-    resultSignal = QtCore.pyqtSignal(int,int)
-    def __init__(self,ui):
+    resultSignal = QtCore.pyqtSignal(int,int,int)
+    def __init__(self,ui,num):
         super().__init__()
         self.ui = ui
-
+        self.num = num
         self.obstacle = None
         self.obstacle_xpos = 375
         self.obstacle_ypos = 375
@@ -46,30 +46,31 @@ class ObstacleThread(QtCore.QThread):
             elif self.sign == "--":
                 self.obstacle_xpos -= random.randint(30,40)
                 self.obstacle_ypos -= random.randint(30,40)
-            self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos)
+            self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos,self.num)
             time.sleep(1)
 
 class Obstacle:
     def __init__(self,ui):
         self.ui = ui
         self.threadList = []
-        self.obstacle = None
+        self.obstacleList = []
         self.playCount = 0
         for index in range(0,4):
-            makeObstacle = ObstacleThread(self.ui)
+            makeObstacle = ObstacleThread(self.ui,index)
             makeObstacle.resultSignal.connect(self.showObstacle)
             makeObstacle.start()
             self.threadList.append(makeObstacle)    
             
-            
+            obstacle = QtWidgets.QLabel(self.ui.gamePage)
+            obstacle.setGeometry(375,375,50,50)
+            obstacle.setStyleSheet("background-color : black;")
+            self.obstacleList.append(obstacle)            
 
     # @QtCore.pyqtSlot(int,int)
-    def showObstacle(self,x_value,y_value):
-        self.obstacle = QtWidgets.QLabel(self.ui.gamePage)
-        self.obstacle.setGeometry(375,375,50,50)
-        self.obstacle.setStyleSheet("background-color : black;")
-        self.obstacle.show()
-        self.obstacle.move(x_value,y_value)
+    def showObstacle(self,x_value,y_value,num):
+        self.obstacleList[num].show()
+        self.obstacleList[num].move(x_value,y_value)
+
 # 왜 move인데 움직이지 않고 새로 생성되는가 ? 
 # 왜 시작점이 똑같지 않은가 ? 
 
