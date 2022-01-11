@@ -59,22 +59,19 @@ class Ui:
         self.timeArea.setFont(font)
         self.timeArea.setAlignment(QtCore.Qt.AlignCenter)
 
-        # self.obstacleArea = QtWidgets.QLabel(self.gamePage)
-        # self.obstacleArea.setGeometry(375,375,50,50)
-        # self.obstacleArea.setStyleSheet("background-color : black;")
+        self.gameStartBtn = QtWidgets.QPushButton(self.gamePage)
+        self.gameStartBtn.setGeometry(600,5,190,50)
+        self.gameStartBtn.setStyleSheet("border : 2px solid black;")
+        self.gameStartBtn.setText("Game Start")
+        self.gameStartBtn.setFont(font)
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
+        # self.testObject = QtWidgets.QLabel(self.gamePage)
+        # self.testObject.setGeometry(375,375,50,50)
+        # self.testObject.setStyleSheet(
+        #     "background-color : 2px solid black;"
+        #     "border : 2px solid black;"
+        #     )
 
 
 
