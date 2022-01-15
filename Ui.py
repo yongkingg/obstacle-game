@@ -30,18 +30,34 @@ class Ui:
         self.findidpw_font.setPixelSize(30)
 
         self.startBtn = QtWidgets.QPushButton(self.startPage)
-        self.startBtn.setGeometry(175,500,450,100)
+        self.startBtn.setGeometry(175,650,450,100)
         self.startBtn.setText("Join")
         font.setPointSize(40)
         font.setPixelSize(40)
         self.startBtn.setFont(font)
         
         self.startMessage = QtWidgets.QLabel(self.startPage)
-        self.startMessage.setGeometry(150,250,500,100)
-        self.startMessage.setText("Press the button to join game")
-        font.setPointSize(30)
-        font.setPixelSize(30)
+        self.startMessage.setGeometry(100,200,600,100)
+        self.startMessage.setText("Choose Level")
+        font.setPointSize(40)
+        font.setPixelSize(40)
         self.startMessage.setFont(font)
+        self.startMessage.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.levelBtn = []
+        self.levelBtnText = ["EASY","NORAML","HARD"]
+        for index in range(0,3):
+            tmpBtn = QtWidgets.QPushButton(self.startPage)
+            xPos = 175 + 155*index
+            tmpBtn.setGeometry(xPos,450,125,100)
+            # tmpBtn.setStyleSheet("border : 2px solid black;")
+            tmpBtn.setText(self.levelBtnText[index])
+            font.setPointSize(25)
+            font.setPixelSize(25)
+            tmpBtn.setFont(font)
+            
+            self.levelBtn.append(tmpBtn)
+
         
         # Game Page
         self.gamePage = QtWidgets.QWidget()

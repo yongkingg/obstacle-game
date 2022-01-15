@@ -7,7 +7,6 @@ class GamePage:
     def __init__(self,ui):
         self.ui = ui
         self.char = Character.Character(self.ui)
-
         self.countDown()
         self.connectEvent()
 
