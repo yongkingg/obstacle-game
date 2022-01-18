@@ -48,16 +48,15 @@ class GamePage:
             if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x - 50) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y - 50):
                 self.ui.life -= 1
                 self.ui.showLife.setText("Life :" + str(self.ui.life))
-
         elif self.ui.life == 0:
             for index in range(0,len(self.threadList)):
                 self.threadList[index].obstacleAlive = False
             self.ui.showLife.setText("Life :" + str(self.ui.life)) 
-            self.getConfig = Config.Config()
-            self.getConfig.dialog()
-            self.getConfig.messege.setText("Game Over!")
-            self.getConfig.alert.show()
             self.runCountDown.state_run = False
+            self.getConfig = Config.Config(self.ui)
+            self.getConfig.gameover_dialog()
+            self.getConfig.alert.show()
+
 
 
 
