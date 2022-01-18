@@ -59,7 +59,6 @@ class ObstacleThread(QtCore.QThread):
             elif math.sin(self.theta) < 0:
                 self.obstacle_ypos = self.obstacle_ypos - (self.obstacleSpeed * math.sin(self.theta))
             self.theta += math.pi
-
         else:
             self.obstacle_ypos = round(self.obstacle_ypos + (self.obstacleSpeed * math.sin(self.theta)))
 
@@ -72,17 +71,17 @@ class ObstacleThread(QtCore.QThread):
         while True:
             self.check_xpos()
             self.check_ypos()
-            print(self.obstacle_xpos,self.obstacle_ypos)
             self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos,self.num)
             time.sleep(random.random())
 
 class Obstacle:
-    def __init__(self,ui):
+    def __init__(self,ui,level):
         self.ui = ui
         self.threadList = []
         self.obstacleList = []
-        self.obstacleCount = 10
+        self.obstacleCount = 5 + (level*5)
         self.playCount = 0
+
         for index in range(0,self.obstacleCount):
             obstacle = QtWidgets.QLabel(self.ui.gamePage)
             obstacle.setGeometry(375,400,50,50)
@@ -97,4 +96,3 @@ class Obstacle:
 
     def showObstacle(self,x_value,y_value,num):
         self.obstacleList[num].move(x_value,y_value)
-        

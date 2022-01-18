@@ -5,10 +5,11 @@ import CountDown
 
 
 class GamePage:
-    def __init__(self,ui):
+    def __init__(self,ui,level):
         self.ui = ui
+        self.level = level
+        self.setLevel()
         self.char = Character.Character(self.ui)
-        self.countDown()
         self.connectEvent()
 
 
@@ -22,5 +23,13 @@ class GamePage:
 
     def startGame(self):
         self.ui.gameStartBtn.hide()
-        self.showObstacle = Obstacle.Obstacle(self.ui)  
-        
+        self.countDown()
+        self.showObstacle = Obstacle.Obstacle(self.ui,self.level)  
+
+    def setLevel(self):
+        if self.level == self.ui.levelBtnText[0]:
+            self.level = 1
+        elif self.level == self.ui.levelBtnText[1]:
+            self.level = 2
+        elif self.level == self.ui.levelBtnText[2]:
+            self.level = 3

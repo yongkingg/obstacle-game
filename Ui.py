@@ -31,6 +31,7 @@ class Ui:
 
         self.startBtn = QtWidgets.QPushButton(self.startPage)
         self.startBtn.setGeometry(175,650,450,100)
+        self.startBtn.setStyleSheet("border : 2px solid black;")
         self.startBtn.setText("Join")
         font.setPointSize(40)
         font.setPixelSize(40)
@@ -45,12 +46,12 @@ class Ui:
         self.startMessage.setAlignment(QtCore.Qt.AlignCenter)
 
         self.levelBtn = []
-        self.levelBtnText = ["EASY","NORAML","HARD"]
+        self.levelBtnText = ["EASY","NORAMAL","HARD"]
         for index in range(0,3):
             tmpBtn = QtWidgets.QPushButton(self.startPage)
             xPos = 175 + 155*index
             tmpBtn.setGeometry(xPos,450,125,100)
-            # tmpBtn.setStyleSheet("border : 2px solid black;")
+            tmpBtn.setStyleSheet("border : 2px solid black;")
             tmpBtn.setText(self.levelBtnText[index])
             font.setPointSize(25)
             font.setPixelSize(25)
@@ -74,6 +75,7 @@ class Ui:
         self.timeArea.setStyleSheet("border : 2px solid black;")
         self.timeArea.setFont(font)
         self.timeArea.setAlignment(QtCore.Qt.AlignCenter)
+        self.timeArea.setText("60")
 
         self.gameStartBtn = QtWidgets.QPushButton(self.gamePage)
         self.gameStartBtn.setGeometry(600,5,190,50)
