@@ -33,5 +33,5 @@ class Character:
                 self.ui.character_y += 0
             else:
                 self.ui.character_y += 20
-
+        print(self.ui.character_x,self.ui.character_y)
         self.ui.character.move(self.ui.character_x,self.ui.character_y)

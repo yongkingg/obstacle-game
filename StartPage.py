@@ -2,7 +2,7 @@ import Ui
 import GamePage
 from PyQt5 import QtWidgets, QtCore, Qt
 import sys
-import CountDown
+
 class StartPage:
     def __init__(self):
         self.ui = Ui.Ui()
@@ -18,6 +18,5 @@ class StartPage:
 
 if __name__ =="__main__":
     app = QtWidgets.QApplication(sys.argv)
-    startPage = StartPage()
+    startPagdsaddae = StartPage()
     sys.exit(app.exec_())                              
-

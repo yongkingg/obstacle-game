@@ -3,6 +3,7 @@ import Character
 import Obstacle
 import CountDown
 
+
 class GamePage:
     def __init__(self,ui):
         self.ui = ui
@@ -21,4 +22,5 @@ class GamePage:
 
     def startGame(self):
         self.ui.gameStartBtn.hide()
-        self.obstacle = Obstacle.Obstacle(self.ui)
+        self.showObstacle = Obstacle.Obstacle(self.ui)  
+        
