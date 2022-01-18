@@ -1,13 +1,11 @@
 from ast import While
 from concurrent.futures import thread
-from PyQt5 import QtWidgets, QtCore, Qt
+from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 import math
 import threading
 import random
 import time
-from argon2 import PasswordHasher
-
-from sqlalchemy import false
+import Config
 
 class ObstacleThread(QtCore.QThread):
     resultSignal = QtCore.pyqtSignal(int,int,int)
@@ -71,6 +69,7 @@ class ObstacleThread(QtCore.QThread):
         while True:
             self.check_xpos()
             self.check_ypos()
+                        
             self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos,self.num)
             time.sleep(random.random())
 
@@ -80,6 +79,7 @@ class Obstacle:
         self.threadList = []
         self.obstacleList = []
         self.obstacleCount = 5 + (level*5)
+        # self.obstacleCount = 1
         self.playCount = 0
 
         for index in range(0,self.obstacleCount):
@@ -96,3 +96,21 @@ class Obstacle:
 
     def showObstacle(self,x_value,y_value,num):
         self.obstacleList[num].move(x_value,y_value)
+        
+    
+        if self.ui.life != 0:
+            if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x - 50) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y - 50):
+                self.ui.life -= 1
+                self.ui.showLife.setText("Life :" + str(self.ui.life))
+            else:
+                pass
+
+        elif self.ui.life == 0:
+            self.getConfig = Config.Config()
+            self.getConfig.dialog()
+            self.getConfig.messege.setText("Game Over!")
+            
+            self.getConfig.alert.show()
+            self.ui.showLife.setText("Life :" + str(self.ui.life))
+
+

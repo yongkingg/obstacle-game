@@ -4,6 +4,7 @@ from sqlalchemy import false, true
 import Ui
 import GamePage
 from PyQt5 import QtWidgets, QtCore, Qt, QtGui
+import Config
 import sys
 
 class StartPage:
@@ -15,7 +16,7 @@ class StartPage:
         self.messege = None
 
         self.connectEvent()
-
+        
     def connectEvent(self):
         self.ui.startBtn.clicked.connect(self.startGame)
         for index in range(0,len(self.ui.levelBtn)):
@@ -38,20 +39,12 @@ class StartPage:
                 )
         self.levelClicked = True
 
-
-
     def startGame(self):
         if self.levelClicked == False:
-            self.alert = QtWidgets.QDialog()
-            self.alert.resize(300,200)
-            self.alert.setWindowTitle("Warring")
-
-            self.messege = QtWidgets.QLabel(self.alert)
-            self.messege.setGeometry(0,0,300,200)
-            self.messege.setAlignment(QtCore.Qt.AlignCenter)
-            self.messege.setText("Select Level")
-            self.messege.setFont(QtGui.QFont("궁서",30))
-            self.alert.show()
+            self.getConfig = Config.Config()
+            self.getConfig.dialog()
+            self.getConfig.messege.setText("Select Level")
+            self.getConfig.alert.show()
         else:
             self.ui.stackedWidget.setCurrentIndex(1)  
             self.gamePage = GamePage.GamePage(self.ui,self.level)

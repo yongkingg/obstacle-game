@@ -24,7 +24,10 @@ class GamePage:
     def startGame(self):
         self.ui.gameStartBtn.hide()
         self.countDown()
+        self.ui.showLife()
         self.showObstacle = Obstacle.Obstacle(self.ui,self.level)  
+
+        
 
     def setLevel(self):
         if self.level == self.ui.levelBtnText[0]:

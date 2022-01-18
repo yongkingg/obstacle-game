@@ -3,8 +3,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui:
     def __init__(self):
-        self.character_x = 375
-        self.character_y = 500
+        self.character_x = 395
+        self.character_y = 700
+        self.life = 3
 
         font = QtGui.QFont()
         font.setFamily("궁서")
@@ -59,7 +60,6 @@ class Ui:
             
             self.levelBtn.append(tmpBtn)
 
-        
         # Game Page
         self.gamePage = QtWidgets.QWidget()
         self.gamePage.setMinimumSize(QtCore.QSize(800, 800))
@@ -83,15 +83,17 @@ class Ui:
         self.gameStartBtn.setText("Game Start")
         self.gameStartBtn.setFont(font)
         
-
-        # self.testObject = QtWidgets.QLabel(self.gamePage)
-        # self.testObject.setGeometry(375,375,50,50)
-        # self.testObject.setStyleSheet(
-        #     "background-color : 2px solid black;"
-        #     "border : 2px solid black;"
-        #     )
-
-
-
         self.stackedWidget.setCurrentIndex(0)  
         self.mainWindow.show()
+
+
+
+
+    def showLife(self):
+        self.showLife = QtWidgets.QLabel(self.gamePage)
+        self.showLife.setGeometry(600,5,190,50)
+        self.showLife.setStyleSheet("border : 2px solid black;")
+        self.showLife.setText("Life :" + str(self.life))
+        self.showLife.setFont(QtGui.QFont("궁서",30))
+        self.showLife.setAlignment(QtCore.Qt.AlignCenter)
+        self.showLife.show()
