@@ -19,9 +19,6 @@ class ObstacleThread(QtCore.QThread):
         self.obstacle_ypos = 375
         self.obstacleAlive = True
         
-    # 가로 -5 755
-    # 세로 0 740
-
     def check_xpos(self):
         if self.obstacle_xpos >= 730:
             if math.cos(self.theta) >= 0:
@@ -42,7 +39,6 @@ class ObstacleThread(QtCore.QThread):
             self.obstacle_xpos = int(self.obstacle_xpos/10) * 10 + 10
         else:
             self.obstacle_xpos = int(self.obstacle_xpos/10) * 10 
-
 
     def check_ypos(self):
         if self.obstacle_ypos >= 730:
@@ -69,48 +65,11 @@ class ObstacleThread(QtCore.QThread):
         while True:
             self.check_xpos()
             self.check_ypos()
-                        
             self.resultSignal.emit(self.obstacle_xpos,self.obstacle_ypos,self.num)
             time.sleep(random.random())
-
-class Obstacle:
-    def __init__(self,ui,level):
-        self.ui = ui
-        self.threadList = []
-        self.obstacleList = []
-        self.obstacleCount = 5 + (level*5)
-        # self.obstacleCount = 1
-        self.playCount = 0
-
-        for index in range(0,self.obstacleCount):
-            obstacle = QtWidgets.QLabel(self.ui.gamePage)
-            obstacle.setGeometry(375,400,50,50)
-            obstacle.setStyleSheet("background-color : black;")
-            obstacle.show()
-            self.obstacleList.append(obstacle)
             
-            makeObstacle = ObstacleThread(self.ui,index)
-            makeObstacle.resultSignal.connect(self.showObstacle)
-            self.threadList.append(makeObstacle)    
-            self.threadList[index].start()
-
-    def showObstacle(self,x_value,y_value,num):
-        self.obstacleList[num].move(x_value,y_value)
-        
-    
-        if self.ui.life != 0:
-            if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x - 50) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y - 50):
-                self.ui.life -= 1
-                self.ui.showLife.setText("Life :" + str(self.ui.life))
-            else:
-                pass
-
-        elif self.ui.life == 0:
-            self.getConfig = Config.Config()
-            self.getConfig.dialog()
-            self.getConfig.messege.setText("Game Over!")
+            if self.obstacleAlive == False:
+                break
             
-            self.getConfig.alert.show()
-            self.ui.showLife.setText("Life :" + str(self.ui.life))
 
 
