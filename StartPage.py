@@ -7,6 +7,8 @@ from PyQt5 import QtWidgets, QtCore, Qt, QtGui
 import Config
 import sys
 
+# 시간 끝나면 다음 동작 구현
+# 폰트 깨짐 문제
 class StartPage:
     def __init__(self):
         self.ui = Ui.Ui()

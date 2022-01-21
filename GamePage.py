@@ -18,17 +18,12 @@ class GamePage:
     def connectEvent(self):
         self.ui.gameStartBtn.clicked.connect(self.startGame)
 
-    def countDown(self):
-        self.runCountDown = CountDown.CountDown(self.ui)
-        self.runCountDown.daemon = True
-        self.runCountDown.start()
+    
 
     def startGame(self):
         self.ui.gameStartBtn.hide()
-        self.countDown()
         self.ui.showLife()
         self.obstacleCount = 5 + (self.level*5)
-
         for index in range(0,self.obstacleCount):
             obstacle = QtWidgets.QLabel(self.ui.gamePage)
             obstacle.setGeometry(375,400,50,50)
@@ -41,25 +36,26 @@ class GamePage:
             self.threadList.append(makeObstacle)    
             self.threadList[index].start()
 
+        self.runCountDown = CountDown.CountDown(self.ui,self.threadList,makeObstacle)
+        self.runCountDown.daemon = True
+        self.runCountDown.start()
+
     def showObstacle(self,x_value,y_value,num):
         self.obstacleList[num].move(x_value,y_value)
-        
         if self.ui.life != 0:
-            if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x - 50) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y - 50):
+            if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y):
                 self.ui.life -= 1
-                self.ui.showLife.setText("Life :" + str(self.ui.life))
+                self.ui.lifeSpace.setText("Life :" + str(self.ui.life))
         elif self.ui.life == 0:
             for index in range(0,len(self.threadList)):
                 self.threadList[index].obstacleAlive = False
-            self.ui.showLife.setText("Life :" + str(self.ui.life)) 
+            self.ui.lifeSpace.setText("Life :" + str(self.ui.life)) 
             self.runCountDown.state_run = False
-            self.getConfig = Config.Config(self.ui)
+
+            configText = "Game Over!"
+            self.getConfig = Config.Config(self.ui,configText)
             self.getConfig.gameover_dialog()
             self.getConfig.alert.show()
-
-
-
-
 
     def setLevel(self):
         if self.level == self.ui.levelBtnText[0]:

@@ -2,8 +2,9 @@ import StartPage
 from PyQt5 import QtWidgets,QtGui,Qt,QtCore
 
 class Config:
-    def __init__(self,ui):
+    def __init__(self,ui,text):
         self.ui = ui
+        self.text = text
 
     def dialog(self):
         self.alert = QtWidgets.QDialog()
@@ -22,7 +23,7 @@ class Config:
         self.messege.setGeometry(0,0,300,200)
         self.messege.setAlignment(QtCore.Qt.AlignCenter)
         self.messege.setFont(QtGui.QFont("궁서",30))
-        self.messege.setText("Game Over!")
+        self.messege.setText(self.text)
 
 
         self.button_dialog = []
