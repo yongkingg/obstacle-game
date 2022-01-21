@@ -44,7 +44,7 @@ class GamePage:
     def showObstacle(self,x_value,y_value,num):
         if self.ui.life != 0:
             self.obstacleList[num].move(x_value,y_value)
-            if (x_value <= self.ui.character_x + 60 and x_value >= self.ui.character_x - 10) and (y_value <= self.ui.character_y + 60 and y_value >= self.ui.character_y - 10):
+            if (x_value <= self.ui.character_x + 55 and x_value >= self.ui.character_x - 55) and (y_value <= self.ui.character_y + 55 and y_value >= self.ui.character_y - 55):
                 self.ui.life -= 1
                 self.ui.lifeSpace.setText("Life :" + str(self.ui.life))
         elif self.ui.life == 0:
