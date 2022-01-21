@@ -90,10 +90,15 @@ class Ui:
 
 
     def showLife(self):
+        font = QtGui.QFont()
+        font.setFamily("궁서")
+        font.setPointSize(25)
+        font.setPixelSize(25)
+
         self.lifeSpace = QtWidgets.QLabel(self.gamePage)
         self.lifeSpace.setGeometry(600,5,190,50)
         self.lifeSpace.setStyleSheet("border : 2px solid black;")
         self.lifeSpace.setText("Life :" + str(self.life))
-        self.lifeSpace.setFont(QtGui.QFont("궁서",30))
+        self.lifeSpace.setFont(font)
         self.lifeSpace.setAlignment(QtCore.Qt.AlignCenter)
         self.lifeSpace.show()

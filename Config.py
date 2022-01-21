@@ -16,13 +16,19 @@ class Config:
         self.messege.setFont(QtGui.QFont("궁서",30))
 
     def gameover_dialog(self):
+        
+        font = QtGui.QFont()
+        font.setFamily("궁서")
+        font.setPointSize(25)
+        font.setPixelSize(25)
+
         self.alert = QtWidgets.QDialog()
         self.alert.resize(300,200)
         self.alert.setWindowTitle("")
         self.messege = QtWidgets.QLabel(self.alert)
         self.messege.setGeometry(0,0,300,200)
         self.messege.setAlignment(QtCore.Qt.AlignCenter)
-        self.messege.setFont(QtGui.QFont("궁서",30))
+        self.messege.setFont(font)
         self.messege.setText(self.text)
 
 
@@ -33,7 +39,8 @@ class Config:
             xPos = 40 + index * 120
             tmpBtn.setGeometry(xPos,140,100,50)
             tmpBtn.setText(self.button_dialog_Text[index])
-            tmpBtn.setFont(QtGui.QFont("궁서",15))
+            tmpBtn.setFont(font)
+            
             self.button_dialog.append(tmpBtn)
         self.connectEvent()
     

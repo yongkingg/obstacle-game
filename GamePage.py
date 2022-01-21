@@ -12,6 +12,7 @@ class GamePage:
         self.threadList = []
         self.obstacleList = []
         self.setLevel()
+
         self.char = Character.Character(self.ui)
         self.connectEvent()
 
@@ -41,9 +42,9 @@ class GamePage:
         self.runCountDown.start()
 
     def showObstacle(self,x_value,y_value,num):
-        self.obstacleList[num].move(x_value,y_value)
         if self.ui.life != 0:
-            if (x_value <= self.ui.character_x + 50 and x_value >= self.ui.character_x) and (y_value <= self.ui.character_y + 50 and y_value >= self.ui.character_y):
+            self.obstacleList[num].move(x_value,y_value)
+            if (x_value <= self.ui.character_x + 60 and x_value >= self.ui.character_x - 10) and (y_value <= self.ui.character_y + 60 and y_value >= self.ui.character_y - 10):
                 self.ui.life -= 1
                 self.ui.lifeSpace.setText("Life :" + str(self.ui.life))
         elif self.ui.life == 0:
@@ -51,11 +52,11 @@ class GamePage:
                 self.threadList[index].obstacleAlive = False
             self.ui.lifeSpace.setText("Life :" + str(self.ui.life)) 
             self.runCountDown.state_run = False
-
             configText = "Game Over!"
             self.getConfig = Config.Config(self.ui,configText)
             self.getConfig.gameover_dialog()
             self.getConfig.alert.show()
+
 
     def setLevel(self):
         if self.level == self.ui.levelBtnText[0]:
@@ -64,3 +65,4 @@ class GamePage:
             self.level = 2
         elif self.level == self.ui.levelBtnText[2]:
             self.level = 3
+
