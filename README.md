@@ -1,5 +1,9 @@
 # This is Obstacle-avoid game.
 
+You must download all file to play this game.
+
+Unzip and press f5 on the start page to start my game.
+
 Choose Level and press join button.
 
 You will see Start button in the upper right corner.
