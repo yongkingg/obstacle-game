@@ -2,6 +2,10 @@
 
 Choose Level and press join button.
 
+You will see Start button in the upper right corner.
+
+Press the button to start the game.
+
 You can move by key W, A, S, D(W = Up, A = left, S = Down, D = Right)
 
 You have to survive for 60 seconds.
