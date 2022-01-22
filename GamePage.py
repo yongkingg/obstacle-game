@@ -46,6 +46,10 @@ class GamePage:
             self.obstacleList[num].move(x_value,y_value)
             if (x_value <= self.ui.character_x + 55 and x_value >= self.ui.character_x - 55) and (y_value <= self.ui.character_y + 55 and y_value >= self.ui.character_y - 55):
                 self.ui.life -= 1
+                if self.ui.life == 2:
+                    self.ui.character.setStyleSheet("background-color : green;")
+                elif self.ui.life == 1:
+                    self.ui.character.setStyleSheet("background-color : blue;")
                 self.ui.lifeSpace.setText("Life :" + str(self.ui.life))
         elif self.ui.life == 0:
             for index in range(0,len(self.threadList)):
